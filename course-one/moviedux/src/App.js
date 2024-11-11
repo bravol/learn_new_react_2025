@@ -1,13 +1,14 @@
+import Header from "./components/Header";
 import "./styles.css";
+import "./App.css";
+import Footer from "./components/Footer";
 function App() {
   return (
-    <div>
-      <header className="header">
-        <h1>Welcome to Movie Dux</h1>
-      </header>
-      <footer className="footer">
-        <p className="footer">Footer content here</p>
-      </footer>
+    <div className="App">
+      <div className="container">
+        <Header />
+      </div>
+      <Footer />
     </div>
   );
 }
