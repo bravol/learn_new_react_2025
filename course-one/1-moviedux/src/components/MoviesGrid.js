@@ -2,7 +2,7 @@ import "./../styles.css";
 import { useState, useEffect } from "react";
 import MovieCard from "./MovieCard";
 
-// In React, Hooks are functions that let you use state and other React features in functional components, without the need for class components.
+// In React, Hooks are functions that lets you to use state and other React features in functional components, without the need for class components.
 // Introduced in React 16.8, they allow for more reusable and manageable code by separating logic into independent functions.
 const MoviesGrid = () => {
   const [movies, setMovies] = useState([]); //Returns an array with the current state and a function to update it. it manages state in functional components
