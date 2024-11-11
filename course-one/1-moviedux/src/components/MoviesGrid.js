@@ -6,6 +6,9 @@ import MovieCard from "./MovieCard";
 // Introduced in React 16.8, they allow for more reusable and manageable code by separating logic into independent functions.
 const MoviesGrid = () => {
   const [movies, setMovies] = useState([]); //Returns an array with the current state and a function to update it. it manages state in functional components
+  const [searchTerm, setSearchTerm] = useState("");
+  const [genre, setGenre] = useState("All Genres");
+  const [rating, setRating] = useState("All");
 
   useEffect(() => {
     // Fetch movie data from an API or local storage
@@ -16,11 +19,51 @@ const MoviesGrid = () => {
   // useEffect Runs after every render by default, but can be controlled to run on specific dependencies.
   // Handles side effects, such as data fetching, subscriptions, and manual DOM manipulations.
   // Replaces lifecycle methods like componentDidMount, componentDidUpdate, and componentWillUnmount.
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+  //   render filtered movies
+  const filteredMovies = movies.filter((movie) =>
+    movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return (
-    <div className="movies-grid">
-      {movies.map((movie) => (
-        <MovieCard movie={movie} key={movie.id} />
-      ))}
+    <div>
+      {/* search */}
+      <input
+        type="text"
+        placeholder="Search movies..."
+        className="search-input"
+        value={searchTerm}
+        onChange={handleSearchChange}
+      />
+      {/* filter bar */}
+      <div className="filter-bar">
+        <div className="filter-slot">
+          <label>Genre</label>
+          <select className="filter-dropdown">
+            <option>All Genres</option>
+            <option>Action</option>
+            <option>Drama</option>
+            <option>Fantasy</option>
+            <option>Horror</option>
+          </select>
+        </div>
+        <div className="filter-slot">
+          <label>Rating</label>
+          <select className="filter-dropdown">
+            <option>All</option>
+            <option>Good</option>
+            <option>Ok</option>
+            <option>Bad</option>
+          </select>
+        </div>
+      </div>
+      <div className="movies-grid">
+        {filteredMovies.map((movie) => (
+          <MovieCard movie={movie} key={movie.id} />
+        ))}
+      </div>
     </div>
   );
 };
