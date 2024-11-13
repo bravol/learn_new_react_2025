@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import BlogPage from "./components/blogPage";
+import UserInfoContext from "./context/UserInfoContext";
+import { ThemeProvider } from "./context/ThemeProvider";
+import ContentComponent from "./components/ContentComponent";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider>
+      <ContentComponent />
+    </ThemeProvider>
   );
 }
 
 export default App;
+// function App() {
+//   const userInfo = { username: "Lumala", isAdmin: true };
+//   return (
+//     <UserInfoContext.Provider value={userInfo}>
+//       <BlogPage />
+//     </UserInfoContext.Provider>
+//   );
+// }
+
+// export default App;
