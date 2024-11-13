@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // reducer manages state in a more centralized way
 // separating logic from user actions
 // dispatch actions from components(handled by reducer)
 //  information gets passed to the reducer in the payload
-const TicketForm = () => {
+const TicketForm = ({ dispatch, editingTicket }) => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const [priority, setPriority] = useState("low");
+  const [priority, setPriority] = useState("1");
+
+  useEffect(() => {
+    if (editingTicket) {
+      setTitle(editingTicket.title);
+      setDesc(editingTicket.description);
+      setPriority(editingTicket.priority);
+    } else {
+      clearForm();
+    }
+  }, [editingTicket]);
 
   const priorityLabels = {
     1: "Low",
@@ -17,17 +27,21 @@ const TicketForm = () => {
   const clearForm = () => {
     setTitle("");
     setDesc("");
-    setPriority("low");
+    setPriority("1");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault(); //prevent page reloading
-    const data = {
-      id: new Date().toISOString(),
+    const ticket_data = {
+      id: editingTicket ? editingTicket.id : new Date().toISOString(),
       title: title,
       description: desc,
       priority: priority,
     };
+    dispatch({
+      type: editingTicket ? "UPDATE-TICKET" : "ADD-TICKET",
+      payload: ticket_data,
+    });
     clearForm();
   };
 
