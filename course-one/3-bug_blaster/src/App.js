@@ -3,6 +3,8 @@ import TicketForm from "./components/TicketForm";
 import "./styles.css";
 
 function App() {
+  // intial state of tickets
+  const initalState = { tickets: [] };
   return (
     <div className="App">
       <div className="container">

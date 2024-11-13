@@ -1,5 +1,8 @@
 import { useState } from "react";
-
+// reducer manages state in a more centralized way
+// separating logic from user actions
+// dispatch actions from components(handled by reducer)
+//  information gets passed to the reducer in the payload
 const TicketForm = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
